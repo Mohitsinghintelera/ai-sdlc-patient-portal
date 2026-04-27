@@ -10,6 +10,8 @@ namespace PatientPortal.Api.Tests;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
+    private readonly string _databaseName = Guid.NewGuid().ToString();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
@@ -24,7 +26,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
             services.AddDbContext<PatientPortalDbContext>(options =>
             {
-                options.UseInMemoryDatabase("PatientPortalTestDb");
+                options.UseInMemoryDatabase(_databaseName);
             });
 
             var provider = services.BuildServiceProvider();

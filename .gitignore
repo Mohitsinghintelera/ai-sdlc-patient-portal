@@ -44,3 +44,9 @@ storybook-static/
 # Misc
 .cache/
 /AI-SDLC-Patient-Backend/.vs
+
+# .NET build artifacts
+AI-SDLC-Patient-Backend/**/bin/
+AI-SDLC-Patient-Backend/**/obj/
+AI-SDLC-Patient-Backend/**/*.user
+AI-SDLC-Patient-Backend/**/*.suo

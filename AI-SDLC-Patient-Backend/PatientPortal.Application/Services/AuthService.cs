@@ -24,7 +24,7 @@ public class AuthService : IAuthService
         _settings = authOptions.Value;
     }
 
-    public async Task<RegisterSuccessResponse> RegisterAsync(string fullName, string email, string password, string confirmPassword)
+    public async Task<RegisterSuccessResponse> RegisterAsync(string fullName, string email, string password, string confirmPassword, DateOnly dateOfBirth)
     {
         if (!string.Equals(password, confirmPassword, StringComparison.Ordinal))
         {
@@ -47,7 +47,8 @@ public class AuthService : IAuthService
             Role = "Patient",
             IsActive = true,
             RefreshToken = GenerateRefreshToken(),
-            RefreshTokenExpiresOn = DateTime.UtcNow.AddDays(_settings.RefreshTokenExpirationDays)
+            RefreshTokenExpiresOn = DateTime.UtcNow.AddDays(_settings.RefreshTokenExpirationDays),
+            DateOfBirth = dateOfBirth
         };
 
         await _userRepository.AddAsync(user);
@@ -76,7 +77,7 @@ public class AuthService : IAuthService
             throw new AppException("INVALID_CREDENTIALS", "User account is not active.", 401);
         }
 
-         user.RefreshToken = GenerateRefreshToken();
+        user.RefreshToken = GenerateRefreshToken();
         user.RefreshTokenExpiresOn = DateTime.UtcNow.AddDays(_settings.RefreshTokenExpirationDays);
         await _userRepository.SaveChangesAsync();
 
@@ -117,7 +118,8 @@ public class AuthService : IAuthService
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Role = user.Role,
-                IsActive = user.IsActive
+                IsActive = user.IsActive,
+                DateOfBirth = DateOfBirthMapper.FormatDob(user.DateOfBirth)
             }
         };
     }
