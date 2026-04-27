@@ -22,7 +22,8 @@ public class RegisterIntegrationTests : IClassFixture<CustomWebApplicationFactor
             fullName = "Sally Patient",
             email = "sally.patient@example.com",
             password = "Patient123!",
-            confirmPassword = "Patient123!"
+            confirmPassword = "Patient123!",
+            dateOfBirth = "06-15-1988"
         };
 
         var response = await _client.PostAsJsonAsync("/api/v1/auth/register", request);
@@ -35,5 +36,28 @@ public class RegisterIntegrationTests : IClassFixture<CustomWebApplicationFactor
         payload.Data!.Email.Should().Be("sally.patient@example.com");
         payload.Data.FirstName.Should().Be("Sally");
         payload.Data.LastName.Should().Be("Patient");
+    }
+
+    [Fact]
+    public async Task Register_WithValidDob_PersistsDobToUserRecord()
+    {
+        var request = new
+        {
+            fullName = "Bob Dob",
+            email = "bob.dob@example.com",
+            password = "Patient123!",
+            confirmPassword = "Patient123!",
+            dateOfBirth = "03-22-1985"
+        };
+
+        var registerResponse = await _client.PostAsJsonAsync("/api/v1/auth/register", request);
+        registerResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+
+        var loginRequest = new { email = "bob.dob@example.com", password = "Patient123!" };
+        var loginResponse = await _client.PostAsJsonAsync("/api/v1/auth/login", loginRequest);
+        loginResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+
+        var loginPayload = await loginResponse.Content.ReadFromJsonAsync<ApiResponse<PatientPortal.Application.Models.Auth.AuthResponse>>();
+        loginPayload!.Data!.User.DateOfBirth.Should().Be("03-22-1985");
     }
 }

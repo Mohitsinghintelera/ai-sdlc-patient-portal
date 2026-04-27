@@ -1,6 +1,6 @@
 # ai-sdlc-patient-portal Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-10
+Auto-generated from all feature plans. Last updated: 2026-04-28
 
 ## Active Technologies
 - TypeScript 5 / Node.js 20 + Next.js 14.2, React 18, axios (existing), sonner (existing), Zustand 5, react-hook-form 7, Zod 3.22 (042-login-api-integration)

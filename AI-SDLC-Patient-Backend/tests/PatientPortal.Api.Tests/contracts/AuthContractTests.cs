@@ -23,7 +23,8 @@ public class AuthContractTests : IClassFixture<CustomWebApplicationFactory>
             fullName = "Jane Doe",
             email = "jane.contract@example.com",
             password = "SecurePassword123!",
-            confirmPassword = "SecurePassword123!"
+            confirmPassword = "SecurePassword123!",
+            dateOfBirth = "04-10-1990"
         };
 
         await _client.PostAsJsonAsync("/api/v1/auth/register", registration);

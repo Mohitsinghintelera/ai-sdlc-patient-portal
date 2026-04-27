@@ -4,6 +4,7 @@ using PatientPortal.Api.Exceptions;
 using PatientPortal.Api.Models.Auth;
 using PatientPortal.Api.Models.Error;
 using PatientPortal.Application.Interfaces;
+using PatientPortal.Application.Mappers;
 using PatientPortal.Application.Models.Auth;
 using PatientPortal.Application.Services;
 
@@ -39,7 +40,8 @@ public class AuthController : ControllerBase
             throw new ValidationException(validation.Errors);
         }
 
-        var result = await _authService.RegisterAsync(request.FullName, request.Email, request.Password, request.ConfirmPassword);
+        var dateOfBirth = DateOfBirthMapper.ParseDob(request.DateOfBirth)!.Value;
+        var result = await _authService.RegisterAsync(request.FullName, request.Email, request.Password, request.ConfirmPassword, dateOfBirth);
 
         var response = new ApiResponse<RegisterSuccessResponse>
         {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PatientPortal.Api.Exceptions;
 using PatientPortal.Api.Models.Error;
 using PatientPortal.Application.Interfaces;
+using PatientPortal.Application.Mappers;
 using PatientPortal.Application.Models.Auth;
 
 namespace PatientPortal.Api.Controllers;
@@ -45,7 +46,8 @@ public class UserController : ControllerBase
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Role = user.Role,
-                IsActive = user.IsActive
+                IsActive = user.IsActive,
+                DateOfBirth = DateOfBirthMapper.FormatDob(user.DateOfBirth)
             }
         };
 
