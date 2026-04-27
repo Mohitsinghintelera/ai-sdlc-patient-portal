@@ -38,6 +38,24 @@ export const registrationSchema = z.object({
   terms: z
     .boolean()
     .refine(val => val === true, 'You must agree to the Terms of Service'),
+
+  dateOfBirth: z
+    .string()
+    .min(1, 'Date of birth is required')
+    .refine((val) => {
+      const date = new Date(val);
+      return !isNaN(date.getTime());
+    }, 'Please enter a valid date of birth')
+    .refine((val) => {
+      const date = new Date(val);
+      return date <= new Date();
+    }, 'Date of birth cannot be in the future')
+    .refine((val) => {
+      const date = new Date(val);
+      const minDate = new Date();
+      minDate.setFullYear(minDate.getFullYear() - 200);
+      return date >= minDate;
+    }, 'Please enter a valid date of birth'),
 }).superRefine((data, ctx) => {
   if (data.confirmPassword && data.password !== data.confirmPassword) {
     ctx.addIssue({

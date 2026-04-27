@@ -13,6 +13,7 @@ const testRegistrationInput: RegistrationInput = {
   password: 'SecurePass123!',
   confirmPassword: 'SecurePass123!',
   terms: true,
+  dateOfBirth: '1990-06-15',
 };
 
 // Test 2: RegistrationSuccess type export

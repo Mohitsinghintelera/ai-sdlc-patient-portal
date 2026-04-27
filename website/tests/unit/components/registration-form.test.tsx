@@ -22,6 +22,7 @@ async function fillValidForm(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText(/Last Name/i), validRegistrationInput.lastName);
   await user.type(screen.getByLabelText(/Email Address/i), validRegistrationInput.email);
   await user.type(screen.getByLabelText(/Medical ID/i), validRegistrationInput.medicalId);
+  await user.type(screen.getByLabelText(/Date of Birth/i), validRegistrationInput.dateOfBirth);
   await user.type(screen.getByLabelText(/Choose Password/i), validRegistrationInput.password);
   await user.type(screen.getByLabelText(/Confirm Password/i), validRegistrationInput.confirmPassword);
   await user.click(screen.getByRole('checkbox', { name: /terms/i }));
@@ -56,6 +57,24 @@ describe('RegistrationForm Component', () => {
       expect(screen.getByText(/Personal Information/i)).toBeInTheDocument();
       expect(screen.getByText(/Healthcare Credentials/i)).toBeInTheDocument();
       expect(screen.getByText(/Account Security/i)).toBeInTheDocument();
+    });
+
+    it('should render Date of Birth field', () => {
+      render(<RegistrationForm />);
+      expect(screen.getByLabelText(/Date of Birth/i)).toBeInTheDocument();
+    });
+
+    it('should render Date of Birth field as a date input', () => {
+      render(<RegistrationForm />);
+      const dobInput = screen.getByLabelText(/Date of Birth/i);
+      expect(dobInput).toHaveAttribute('type', 'date');
+    });
+
+    it('should have max attribute set to today on Date of Birth field', () => {
+      render(<RegistrationForm />);
+      const dobInput = screen.getByLabelText(/Date of Birth/i);
+      const today = new Date().toISOString().split('T')[0];
+      expect(dobInput).toHaveAttribute('max', today);
     });
   });
 

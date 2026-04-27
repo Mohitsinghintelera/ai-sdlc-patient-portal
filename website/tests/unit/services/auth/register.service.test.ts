@@ -46,6 +46,7 @@ describe('T016 — registerUser maps form fields to API payload', () => {
       email: 'jane.doe@example.com',
       password: 'SecurePass123!',
       confirmPassword: 'SecurePass123!',
+      dateOfBirth: '1990-06-15',
     });
   });
 

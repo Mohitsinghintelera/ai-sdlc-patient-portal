@@ -36,9 +36,10 @@ Content-Type: application/json
 
 ```typescript
 interface RegisterRequest {
-  fullName: string;    // Required. 2-256 characters.
-  email: string;       // Required. Valid email format.
-  password: string;    // Required. 8-128 characters with complexity.
+  fullName: string;      // Required. 2-256 characters.
+  email: string;         // Required. Valid email format.
+  password: string;      // Required. 8-128 characters with complexity.
+  dateOfBirth: string;   // Required. ISO date format (YYYY-MM-DD). Must be past date, max 200 years ago.
 }
 ```
 
@@ -48,7 +49,8 @@ interface RegisterRequest {
 {
   "fullName": "Jane Doe",
   "email": "jane.doe@example.com",
-  "password": "SecurePass123!"
+  "password": "SecurePass123!",
+  "dateOfBirth": "1990-06-15"
 }
 ```
 
@@ -71,6 +73,7 @@ The server MUST validate all fields before processing:
 | fullName | Required, 2-256 chars, alphanumeric + spaces/hyphens/apostrophes | INVALID_INPUT | 400 |
 | email | Required, valid email, max 254 chars, UNIQUE in database | INVALID_INPUT or EMAIL_EXISTS | 400 or 409 |
 | password | Required, 8-128 chars, uppercase + lowercase + digit + special char | INVALID_INPUT | 400 |
+| dateOfBirth | Required, valid ISO date (YYYY-MM-DD), must be in the past, max 200 years ago | INVALID_INPUT | 400 |
 
 **Note**: Client performs initial validation via Zod; server performs authoritative validation.
 

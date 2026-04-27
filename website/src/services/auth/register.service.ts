@@ -41,6 +41,7 @@ export async function registerUser(
     email: input.email,
     password: input.password,
     confirmPassword: input.confirmPassword,
+    dateOfBirth: input.dateOfBirth,
   };
 
   for (let attempt = 0; attempt < maxAttempts; attempt++) {

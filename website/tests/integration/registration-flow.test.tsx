@@ -31,6 +31,7 @@ describe('Registration Flow Integration', () => {
     await user.type(screen.getByLabelText(/Last Name/i), validRegistrationInput.lastName);
     await user.type(screen.getByLabelText(/Email Address/i), validRegistrationInput.email);
     await user.type(screen.getByLabelText(/Medical ID/i), validRegistrationInput.medicalId);
+    await user.type(screen.getByLabelText(/Date of Birth/i), validRegistrationInput.dateOfBirth);
     await user.type(screen.getByLabelText(/Choose Password/i), validRegistrationInput.password);
     await user.type(screen.getByLabelText(/Confirm Password/i), validRegistrationInput.confirmPassword);
     await user.click(screen.getByRole('checkbox', { name: /terms/i }));
@@ -90,6 +91,7 @@ describe('Registration Flow Integration', () => {
       await user.type(screen.getByLabelText(/Last Name/i), validRegistrationInput.lastName);
       await user.type(screen.getByLabelText(/Email Address/i), validRegistrationInput.email);
       await user.type(screen.getByLabelText(/Medical ID/i), validRegistrationInput.medicalId);
+      await user.type(screen.getByLabelText(/Date of Birth/i), validRegistrationInput.dateOfBirth);
       await user.type(screen.getByLabelText(/Choose Password/i), validRegistrationInput.password);
       await user.type(screen.getByLabelText(/Confirm Password/i), validRegistrationInput.confirmPassword);
       await user.click(screen.getByRole('checkbox', { name: /terms/i }));

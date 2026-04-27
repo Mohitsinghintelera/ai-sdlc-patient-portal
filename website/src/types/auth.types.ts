@@ -40,6 +40,7 @@ export interface RegistrationInput {
   password: string;
   confirmPassword: string;
   terms: boolean;
+  dateOfBirth: string;
 }
 
 /**

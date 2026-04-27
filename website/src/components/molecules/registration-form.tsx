@@ -38,6 +38,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       password: '',
       confirmPassword: '',
       terms: false,
+      dateOfBirth: '',
     },
   });
 
@@ -135,6 +136,25 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
           error={errors.email?.message}
           required
           autoComplete="email"
+        />
+
+        {/* Date of Birth */}
+        <FormInput
+          {...register('dateOfBirth')}
+          id="date-of-birth"
+          label="Date of Birth"
+          type="date"
+          max={new Date().toISOString().split('T')[0]}
+          min={(() => {
+            const d = new Date();
+            d.setFullYear(d.getFullYear() - 200);
+            return d.toISOString().split('T')[0];
+          })()}
+          error={errors.dateOfBirth?.message}
+          required
+          aria-required="true"
+          disabled={isSubmitting}
+          autoComplete="bday"
         />
       </section>
 

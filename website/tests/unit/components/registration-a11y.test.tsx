@@ -157,6 +157,7 @@ describe('Registration Form - Accessibility (a11y)', () => {
       await user.type(screen.getByLabelText(/Last Name/i), 'Doe');
       await user.type(screen.getByLabelText(/Email Address/i), 'john@example.com');
       await user.type(screen.getByLabelText(/Medical ID/i), 'XX-001-002-003');
+      await user.type(screen.getByLabelText(/Date of Birth/i), '1990-06-15');
       await user.type(screen.getByLabelText(/Choose Password/i), 'SecurePass123!');
       await user.type(screen.getByLabelText(/Confirm Password/i), 'SecurePass123!');
       await user.click(screen.getByRole('checkbox', { name: /terms/i }));

@@ -39,6 +39,7 @@ const validFormData = {
   medicalId: 'MED-001',
   password: 'SecurePass123!',
   confirmPassword: 'SecurePass123!',
+  dateOfBirth: '1990-06-15',
 };
 
 async function fillAndSubmitForm(overrides: Partial<typeof validFormData> = {}) {
@@ -51,6 +52,9 @@ async function fillAndSubmitForm(overrides: Partial<typeof validFormData> = {}) 
   await user.type(screen.getByLabelText(/medical id/i), data.medicalId);
   await user.type(screen.getByLabelText(/choose password/i), data.password);
   await user.type(screen.getByLabelText(/confirm password/i), data.confirmPassword);
+  // Fill DOB using fireEvent since userEvent doesn't support date inputs well
+  const dobInput = screen.getByLabelText(/date of birth/i);
+  await user.type(dobInput, data.dateOfBirth);
   await user.click(screen.getByRole('checkbox'));
   await user.click(screen.getByRole('button', { name: /complete registration/i }));
 }

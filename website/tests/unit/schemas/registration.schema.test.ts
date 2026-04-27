@@ -8,6 +8,7 @@ const validBase = {
   password: 'SecurePass123!',
   confirmPassword: 'SecurePass123!',
   terms: true,
+  dateOfBirth: '1990-06-15',
 };
 
 describe('Registration Schema Validation', () => {
@@ -159,6 +160,52 @@ describe('Registration Schema Validation', () => {
 
     it('should accept when terms is true', () => {
       const result = registrationSchema.safeParse({ ...validBase, terms: true });
+      expect(result.success).toBe(true);
+    });
+  });
+
+  describe('Date of Birth Validation', () => {
+    it('should reject empty dateOfBirth', () => {
+      const result = registrationSchema.safeParse({ ...validBase, dateOfBirth: '' });
+      expect(result.success).toBe(false);
+      if (!result.success) {
+        expect(result.error.errors[0].message).toBe('Date of birth is required');
+      }
+    });
+
+    it('should reject a future date', () => {
+      const future = new Date();
+      future.setFullYear(future.getFullYear() + 1);
+      const futureStr = future.toISOString().split('T')[0];
+      const result = registrationSchema.safeParse({ ...validBase, dateOfBirth: futureStr });
+      expect(result.success).toBe(false);
+      if (!result.success) {
+        expect(result.error.errors.some(e => e.message === 'Date of birth cannot be in the future')).toBe(true);
+      }
+    });
+
+    it('should reject a date older than 200 years', () => {
+      const tooOld = new Date();
+      tooOld.setFullYear(tooOld.getFullYear() - 201);
+      const tooOldStr = tooOld.toISOString().split('T')[0];
+      const result = registrationSchema.safeParse({ ...validBase, dateOfBirth: tooOldStr });
+      expect(result.success).toBe(false);
+      if (!result.success) {
+        expect(result.error.errors.some(e => e.message === 'Please enter a valid date of birth')).toBe(true);
+      }
+    });
+
+    it('should accept a valid past date', () => {
+      const result = registrationSchema.safeParse({ ...validBase, dateOfBirth: '1990-06-15' });
+      expect(result.success).toBe(true);
+    });
+
+    it('should accept a date exactly 200 years ago', () => {
+      const exactly200 = new Date();
+      exactly200.setFullYear(exactly200.getFullYear() - 200);
+      exactly200.setDate(exactly200.getDate() + 1); // one day after the 200-year boundary
+      const dateStr = exactly200.toISOString().split('T')[0];
+      const result = registrationSchema.safeParse({ ...validBase, dateOfBirth: dateStr });
       expect(result.success).toBe(true);
     });
   });

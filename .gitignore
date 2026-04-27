@@ -15,6 +15,7 @@ coverage/
 
 # MCP configuration with secrets
 mcp.json
+.kiro/settings/mcp.json
 
 # Logs
 *.log
@@ -44,3 +45,9 @@ storybook-static/
 # Misc
 .cache/
 /AI-SDLC-Patient-Backend/.vs
+
+# Backend build artifacts
+AI-SDLC-Patient-Backend/**/bin/
+AI-SDLC-Patient-Backend/**/obj/
+# Added by code-review-graph
+.code-review-graph/
