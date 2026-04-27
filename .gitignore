@@ -47,15 +47,28 @@ storybook-static/
 /AI-SDLC-Patient-Backend/.vs
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Backend build artifacts
 AI-SDLC-Patient-Backend/**/bin/
 AI-SDLC-Patient-Backend/**/obj/
 # Added by code-review-graph
 .code-review-graph/
 =======
+=======
+>>>>>>> 298c03d (fix(SCRUM-47): add date of birth field to registration form)
 # .NET build artifacts
 AI-SDLC-Patient-Backend/**/bin/
 AI-SDLC-Patient-Backend/**/obj/
 AI-SDLC-Patient-Backend/**/*.user
 AI-SDLC-Patient-Backend/**/*.suo
+<<<<<<< HEAD
 >>>>>>> cb09f2c (SCRUM-48 Fix)
+=======
+=======
+# Backend build artifacts
+AI-SDLC-Patient-Backend/**/bin/
+AI-SDLC-Patient-Backend/**/obj/
+# Added by code-review-graph
+.code-review-graph/
+>>>>>>> 77783e8 (fix(SCRUM-47): add date of birth field to registration form)
+>>>>>>> 298c03d (fix(SCRUM-47): add date of birth field to registration form)
