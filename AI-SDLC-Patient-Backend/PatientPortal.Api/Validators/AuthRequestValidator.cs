@@ -1,3 +1,4 @@
+using System.Globalization;
 using FluentValidation;
 using PatientPortal.Api.Models.Auth;
 
@@ -29,5 +30,29 @@ public class AuthRequestValidator : AbstractValidator<RegistrationRequest>
         RuleFor(x => x.ConfirmPassword)
             .NotEmpty().WithMessage("confirmPassword is required")
             .Equal(x => x.Password).WithMessage("confirmPassword must match password");
+
+        RuleFor(x => x.DateOfBirth)
+            .NotEmpty().WithMessage("dateOfBirth is required")
+            .Must(v => DateOnly.TryParseExact(v, "MM-dd-yyyy", CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out _))
+            .WithMessage("dateOfBirth must be in MM-DD-YYYY format")
+            .DependentRules(() =>
+            {
+                RuleFor(x => x.DateOfBirth)
+                    .Must(v =>
+                    {
+                        DateOnly.TryParseExact(v, "MM-dd-yyyy", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out var d);
+                        return d < DateOnly.FromDateTime(DateTime.UtcNow);
+                    })
+                    .WithMessage("dateOfBirth must be a past date")
+                    .Must(v =>
+                    {
+                        DateOnly.TryParseExact(v, "MM-dd-yyyy", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out var d);
+                        return DateTime.UtcNow.Year - d.Year <= 200;
+                    })
+                    .WithMessage("dateOfBirth must be within the last 200 years");
+            });
     }
 }

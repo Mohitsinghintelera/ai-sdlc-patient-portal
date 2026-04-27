@@ -10,4 +10,5 @@ public class User : AuditableEntity
     public bool IsActive { get; set; } = true;
     public string? RefreshToken { get; set; }
     public DateTime? RefreshTokenExpiresOn { get; set; }
+    public DateOnly? DateOfBirth { get; set; }
 }

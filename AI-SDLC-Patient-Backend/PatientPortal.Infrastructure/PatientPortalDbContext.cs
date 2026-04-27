@@ -35,6 +35,8 @@ public class PatientPortalDbContext : DbContext
             builder.Property(u => u.Role)
                 .IsRequired()
                 .HasMaxLength(64);
+            builder.Property(u => u.DateOfBirth)
+                .HasColumnType("date");
         });
     }
 }

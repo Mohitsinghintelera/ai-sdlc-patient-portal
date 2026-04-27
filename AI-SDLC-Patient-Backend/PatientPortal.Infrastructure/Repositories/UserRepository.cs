@@ -16,7 +16,6 @@ public class UserRepository : IUserRepository
     public Task<User?> GetByEmailAsync(string email)
     {
         return _dbContext.Users
-            .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Email == email.ToLowerInvariant());
     }
 

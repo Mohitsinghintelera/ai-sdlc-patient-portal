@@ -46,8 +46,16 @@ storybook-static/
 .cache/
 /AI-SDLC-Patient-Backend/.vs
 
+<<<<<<< HEAD
 # Backend build artifacts
 AI-SDLC-Patient-Backend/**/bin/
 AI-SDLC-Patient-Backend/**/obj/
 # Added by code-review-graph
 .code-review-graph/
+=======
+# .NET build artifacts
+AI-SDLC-Patient-Backend/**/bin/
+AI-SDLC-Patient-Backend/**/obj/
+AI-SDLC-Patient-Backend/**/*.user
+AI-SDLC-Patient-Backend/**/*.suo
+>>>>>>> cb09f2c (SCRUM-48 Fix)
