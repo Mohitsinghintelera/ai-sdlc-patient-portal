@@ -13,11 +13,14 @@ public static class DatabaseExtensions
     {
         using var scope = services.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<PatientPortalDbContext>();
-        
-        // Apply pending migrations
+
+        // Skip migration and seeding for non-relational providers (e.g. in-memory test databases)
+        if (!dbContext.Database.IsRelational())
+        {
+            return;
+        }
+
         await dbContext.Database.MigrateAsync();
-        
-        // Seed data if database is empty
         await SeedDatabaseAsync(dbContext);
     }
 
