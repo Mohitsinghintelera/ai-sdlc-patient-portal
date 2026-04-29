@@ -1,6 +1,0 @@
-{
-  "PatientPortal.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\ai-sdlc-patient\\ai-sdlc-patient-portal\\AI-SDLC-Patient-Backend\\PatientPortal.Api",
-  "PatientPortal.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\ai-sdlc-patient\\ai-sdlc-patient-portal\\AI-SDLC-Patient-Backend\\PatientPortal.Application",
-  "PatientPortal.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\ai-sdlc-patient\\ai-sdlc-patient-portal\\AI-SDLC-Patient-Backend\\PatientPortal.Domain",
-  "PatientPortal.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\ai-sdlc-patient\\ai-sdlc-patient-portal\\AI-SDLC-Patient-Backend\\PatientPortal.Infrastructure"
-}
